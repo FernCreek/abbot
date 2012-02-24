@@ -34,6 +34,16 @@ module SC
       def self.build(entry, dst_path)
         new(entry).build(dst_path)
       end
+      
+      # Reads the content of the source file. If the source file does not exist,
+      # returns an empty array.
+      def read(src_path)
+        if File.exist?(src_path) && !File.directory?(src_path)
+          File.read(src_path)
+        else
+          ""
+        end        
+      end
 
       # Reads the lines from the source file.  If the source file does not
       # exist, returns empty array.
@@ -58,7 +68,15 @@ module SC
           f.write line
         end
       end
-
+      
+      # writes the passed lines to the named file as binary
+      def writelinebinary(dst_path, line)
+        FileUtils.mkdir_p(File.dirname(dst_path))
+        File.open(dst_path, 'wb') do |f|
+          f.write line
+        end
+      end
+      
       # writes the passed lines to the named file
       def writelines(dst_path, lines)
         writeline(dst_path,joinlines(lines))
