@@ -1,3 +1,7 @@
+*SproutCore 1.7.0.4 (March 26, 2012)*
+* Cherry picked changes from Apple's merge_public to prevent quarky list view scroll problems on IE. (3b9fedbb44) 
+* Fixed issue with SC.TemplateCollectionView no cleaning up old childView when the view is removed from the DOM. (7c3607cff5)
+
 *SproutCore 1.7.0.3 (March 5, 2012)*
 * Handlebar escaping issue with ampersands in a double stash {{}} (53b504b530).
 * SC.SplitView was not properly resetting the cursor after a drag had occurred. (b0054e3265).
