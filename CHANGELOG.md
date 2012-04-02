@@ -27,7 +27,7 @@
 * Added definition of 'willLoseFirstResponder' for SC.TextFieldView to ensure that the input field is properly blurred when it looses first responder status (d1d03cd73).
 * Merged Tim Evan's SC.TextFieldView rewrite to fix several odd issues with SC.TextFieldView (1546fdd85f).
 
-
+*****
 
 *SproutCore 1.7.1.beta (August 30, 2011)*
 
