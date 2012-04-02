@@ -1,8 +1,11 @@
-*SproutCore 1.7.0.4 (March 26, 2012)*
+**Seapine SproutCore 1.7.0.4 (March 26, 2012)**
+
 * Cherry picked changes from Apple's merge_public to prevent quarky list view scroll problems on IE. (3b9fedbb44) 
 * Fixed issue with SC.TemplateCollectionView no cleaning up old childView when the view is removed from the DOM. (7c3607cff5)
 
-*SproutCore 1.7.0.3 (March 5, 2012)*
+
+**Seapine SproutCore 1.7.0.3 (March 5, 2012)**
+
 * Handlebar escaping issue with ampersands in a double stash {{}} (53b504b530).
 * SC.SplitView was not properly resetting the cursor after a drag had occurred. (b0054e3265).
 * Fixed more spriting issues (incorrect desktop icon sizes). Quashed commits from Umberto Nicoletti (9d535f49d6). 
@@ -10,15 +13,20 @@
 * Abbot - Reduced the size of the SHA1 hash from 40 chars down to 10 chars (129f859727).
 * Abbot - Fixed Spriting bug on Windows. Newlines were previously converted to CRLF (12fe93376d). 
 
-*SproutCore 1.7.0.2 (January 10, 2012)*
+
+**Seapine SproutCore 1.7.0.2 (January 10, 2012)**
+
 * Fixed SC.TextFieldView copy/cut/paste issues (61cb5b32a9, f4dfe88736).
 * Fixed SC.TextFieldView instantiating accessory views multiple times (911726ea50).
 * Abbot - Merge branch 'mitchless/sccompile-src'. Rebuild of SCCompiler.jar with Java 1.5 (acfdecf4aa).
 * Cherry picked changes from Apple's merge_public to ensure SC.TextFieldView always blurs when loosing first responder (4ac89d80d0).
 
-*SproutCore 1.7.0.1 (December 23, 2011)*
+
+**Seapine SproutCore 1.7.0.1 (December 23, 2011)**
+
 * Added definition of 'willLoseFirstResponder' for SC.TextFieldView to ensure that the input field is properly blurred when it looses first responder status (d1d03cd73).
 * Merged Tim Evan's SC.TextFieldView rewrite to fix several odd issues with SC.TextFieldView (1546fdd85f).
+
 
 
 *SproutCore 1.7.1.beta (August 30, 2011)*
