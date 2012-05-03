@@ -1,3 +1,9 @@
+*Seapine SproutCore 1.8.1.1 (May 3, 2012)*
+* Merged from 'patch/mitchless/sccompile-src'. Rebuild of SCCompiler.jar with Java 1.5 (c548475147).
+* Cherry-picked. Reduced the size of the SHA1 hash from 40 chars down to 10 chars (27564b1e68).
+
+*****
+
 *SproutCore 1.8.0 (March 06, 2012)*
 
 * Bumped the gem version to 1.8.0
