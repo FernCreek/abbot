@@ -89,7 +89,7 @@ module SC::Helpers
       js_paths = paths.select {|p| p =~ /\.js$/}
       
       if html_paths.length > 0
-        command = %{java -jar "#{SC.html_jar}" "#{html_paths.join '" "'}" 2>&1}
+        command = %{java -Xms1g -Xmx1g -jar "#{SC.html_jar}" "#{html_paths.join '" "'}" 2>&1}
         puts "Executing #{command}"
         output = `#{command}`
         
@@ -105,7 +105,7 @@ module SC::Helpers
       
       if js_paths.length > 0
         js_paths.each {|p|
-          command = %{java -jar "#{SC.js_jar}" -o "#{p}" "#{p}" 2>&1}
+          command = %{java -Xms1g -Xmx1g -jar "#{SC.js_jar}" -o "#{p}" "#{p}" 2>&1}
           puts "Executing #{command}"
           output = `#{command}`
 
