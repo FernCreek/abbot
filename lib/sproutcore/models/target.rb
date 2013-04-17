@@ -533,10 +533,12 @@ module SC
         end
 
         # Finally digest the complete string - tada! build number
-        build_number = Digest::SHA1.hexdigest(digests.join)
+        build_number = Digest::SHA1.hexdigest(digests.join).to_s[0...10]
+      else
+        build_number = build_number.to_s
       end
 
-      return build_number.to_s[0..10]
+      return build_number
     end
 
     ######################################################
