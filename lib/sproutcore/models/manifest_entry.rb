@@ -219,7 +219,7 @@ module SC
       end
     end
 
-    BUILD_DIRECTIVES_REGEX = /(sc_require|sc_resource)\(\s*(['"])(.+)['"]\s*\)/
+    BUILD_DIRECTIVES_REGEX = /(sc_require|sc_resource)\(\s*?(['"])(.+?)['"]\s*?\)/
 
     # Scans the source paths for standard build directives and annotates the
     # entry accordingly.  You should only call this method on entries
