@@ -219,7 +219,7 @@ module SC
       end
     end
 
-    BUILD_DIRECTIVES_REGEX = /(sc_require|require|sc_resource)\(\s*(['"])(.+)['"]\s*\)/
+    BUILD_DIRECTIVES_REGEX = /(sc_require|sc_resource)\(\s*(['"])(.+)['"]\s*\)/
 
     # Scans the source paths for standard build directives and annotates the
     # entry accordingly.  You should only call this method on entries
@@ -237,8 +237,6 @@ module SC
         filename = matches[2].ext ''
         case matches[0]
         when 'sc_require'
-          self[:required] << filename
-        when 'require'
           self[:required] << filename
         when 'sc_resource'
           self[:resource] = filename
