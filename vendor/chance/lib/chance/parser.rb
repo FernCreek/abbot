@@ -74,14 +74,17 @@ module Chance
     def create_slice(opts)
       filename = opts[:filename]
 
-      # get current relative path
-      relative = File.dirname(@path)
-
       # Create a path
-      path = File.join(relative, filename)
-      path = path[2..-1] if path[0,2] == "./"
-      path = Pathname.new(path).cleanpath.to_s
+      if @opts[:external_images_path]
+        path = filename
+      else
+        # get current relative path
+        relative = File.dirname(@path)
 
+        path = File.join(relative, filename)
+        path = path[2..-1] if path[0,2] == "./"
+        path = Pathname.new(path).cleanpath.to_s
+      end
       opts = opts.merge({ :path => path })
       opts = normalize_rectangle(opts)
 

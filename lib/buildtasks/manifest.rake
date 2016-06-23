@@ -424,6 +424,53 @@ namespace :manifest do
       # For each "resource" a separate css entry will be created.
       css_entries = {}
 
+      # If this manifest uses external images we need to read in the images used by the manifest and add them to it
+      image_path = target.config[:external_images_path]
+
+      if image_path
+        # First find the manifest file that lists the image assets used by this manifest
+        manifest_files = Dir.glob("#{target[:source_root]}/*.manifest")
+
+        raise ("Missing image manifest file for #{target[:target_name]}") unless manifest_files.count > 0
+
+        # Read the manifest file and build the list of used images
+        used_images = []
+        manifest_files.each do |manifest_files|
+          File.open("#{manifest_files}") do |file|
+            file.each do |file_name|
+              # Strip out trailing newlines
+              file_name.strip!
+
+              # Verify image exists and is of a supported type
+              file_path = "#{image_path}/#{file_name}"
+
+              if File.exists?(file_path) && ['.png', '.jpg', '.jpeg', '.gif'].include?(File.extname(file_path))
+                # Add the file to the manifest
+                entry = manifest.add_entry(file_name)
+                entry = manifest.add_transform entry,
+                  :filename   => ['source', entry[:filename]].join('/'),
+                  :build_path => File.join(manifest[:build_root], 'source', entry[:filename]),
+                  :url => [manifest[:url_root], 'source', entry[:filename]].join("/"),
+                  :build_task => 'build:image',
+                  :entry_type => :image
+                
+                # The manifest now has a standard entry, fix the source paths to be external
+                entry[:source_entry][:source_path] = file_path
+                entry[:source_entry][:source_paths] = [file_path]
+                entry[:source_entry][:staging_path] = file_path
+
+                entry[:source_entries][0][:source_path] = file_path
+                entry[:source_entries][0][:sourcePaths] = [file_path]
+                entry[:source_entries][0][:staging_path] = file_path
+
+                entry[:source_paths] = [file_path]
+                entry[:source_path] = file_path
+              end
+            end
+          end
+        end
+      end
+
       manifest.entries.each do |entry|
         # Chance needs to know about image files so it can embed as data URIs in the
         # CSS. For this reason, if Chance is enabled, we need to send entries for image
@@ -479,7 +526,14 @@ namespace :manifest do
           :instance_id => target[:target_name],
 
           # Sass load paths. This comes from the buildfile.
-          :sass_load_paths => target.target_type == :module ? target.parent_target.config[:sass_load_paths] : target.config[:sass_load_paths]
+          :sass_load_paths => target.target_type == :module ? target.parent_target.config[:sass_load_paths] : target.config[:sass_load_paths],
+
+          # External Images Path, when set in the buildfile images for the manifest will
+          # come from the set path rather than being read from within the manifest. Each
+          # manifest must have a top level file with the .manifest extension that lists
+          # all of the images used in the manifest, each image should be on a separate
+          # line.
+          :external_images_path => target.config[:external_images_path]
         }
         chance_key = manifest[:staging_root] + "/" + resource_name
         
