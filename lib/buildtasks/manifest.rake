@@ -465,6 +465,8 @@ namespace :manifest do
 
                 entry[:source_paths] = [file_path]
                 entry[:source_path] = file_path
+              else
+                raise "Unable to locate image or invalid image in manifest. Image: #{file_path}"
               end
             end
           end
