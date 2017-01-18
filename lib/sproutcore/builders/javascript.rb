@@ -86,6 +86,7 @@ SC.LAZY_INSTANTIATION['#{target_name}'].push(
           SC.logger.warn "\nWARNING: Calling sc_super() with arguments is DEPRECATED. Please use sc_super() only.\n\n"
           "arguments.callee.base.apply(this, #{$1})"
         end
+        code.gsub!(/sc_unused\((.+?)\);/, '')
       end
 
       # and finally rewrite static_url
